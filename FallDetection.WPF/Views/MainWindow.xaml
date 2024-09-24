@@ -1,0 +1,56 @@
+﻿<Window x:Class="FallDetection.WPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FallDetection.WPF.Views"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:vm="clr-namespace:FallDetection.WPF.ViewModels"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+        Title="MainWindow" Height="850" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        >
+    <TabControl>
+        <TabItem Header="Map">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Group 4: Fall Detection" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Margin="5"/>
+                <cef:ChromiumWebBrowser Grid.Row="1" Grid.Column="0" x:Name="GoogleMapBrowser" Height="750" Width="850"/>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 50 0 0">
+                        <Button Content="Receive Data" Height="30" Width="100" Background="LightGreen"/>
+                        <TextBlock Text="Name: " VerticalAlignment="Center" Margin="10 0 0 0"/>
+                        <TextBox Width="120" Height="30" Text="{Binding SearchName}"/>
+                        <Button Content="Search" Margin="8 0 0 0" Height="30" Width="60" Command="{Binding Command_Fun, Mode=OneWay}" CommandParameter="Search"/>
+                    </StackPanel>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding DetectionModelList}" AutoGenerateColumns="False" Height="342" Margin="0, 10, 10, 0" VerticalAlignment="Top">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="110"/>
+                            <DataGridTextColumn Header="Fall Date" Binding="{Binding FallDate}" Width="110" />
+                            <DataGridTextColumn Header="Longitude" Binding="{Binding Longitude}" Width="110" />
+                            <DataGridTextColumn Header="Latitude" Binding="{Binding Latitude}" Width="110" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </Grid>
+        </TabItem>
+        <!--<TabItem Header="Dashboard" Width="100">
+            <TextBlock Text="Dashboard"/>
+        </TabItem>-->
+    </TabControl>
+   
+</Window>
