@@ -4,14 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FallDetection.WPF.Views"
-        xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:vm="clr-namespace:FallDetection.WPF.ViewModels"
-        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:gmap="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
         Title="MainWindow" Height="850" Width="1400"
-        WindowStartupLocation="CenterScreen"
-        >
+        WindowStartupLocation="CenterScreen">
+
     <TabControl>
         <TabItem Header="Map">
             <Grid>
@@ -24,7 +22,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Group 4: Fall Detection" FontWeight="Bold" FontSize="36" HorizontalAlignment="Center" Margin="5"/>
-                <cef:ChromiumWebBrowser Grid.Row="1" Grid.Column="0" x:Name="GoogleMapBrowser" Height="750" Width="850"/>
+                <gmap:GMapControl x:Name="MainMap" Grid.Row="1" Grid.Column="0" Height="750" Width="850"/>
                 <Grid Grid.Row="1" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -52,5 +50,4 @@
             <TextBlock Text="Dashboard"/>
         </TabItem>-->
     </TabControl>
-   
 </Window>

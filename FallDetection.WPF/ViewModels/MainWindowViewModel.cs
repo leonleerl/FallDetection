@@ -1,6 +1,7 @@
 ﻿using FallDetection.WPF.Common;
 using FallDetection.WPF.Models;
 using FallDetection.WPF.Repositories;
+using FallDetection.WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,14 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace FallDetection.WPF.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly DetectionRepository _detectionRepository;
-        public MainWindowViewModel() {
+        private MainWindow _mainWindow;
+        
+        public MainWindowViewModel(MainWindow mainWindow) {
             _detectionRepository = new DetectionRepository();
+            _mainWindow = mainWindow;
         }
 
 
@@ -47,11 +52,15 @@ namespace FallDetection.WPF.ViewModels
             {
                 results = await _detectionRepository.GetByNameAsync(SearchName);
             }
+            // 更新列表和地图标记
             DetectionModelList.Clear();
             foreach (var result in results)
             {
                 DetectionModelList.Add(result);
             }
+
+            // 将标记添加到地图上
+            _mainWindow.AddMarkers(results);
         }
 
         private ObservableCollection<DetectionModel> _detectionModelList = new ObservableCollection<DetectionModel>();
