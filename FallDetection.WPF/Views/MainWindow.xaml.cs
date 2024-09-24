@@ -16,16 +16,16 @@ namespace FallDetection.WPF.Views
             InitializeComponent();
             DataContext = new MainWindowViewModel(this);
 
-            // 设置 GMapControl 的地图提供者
             MainMap.MapProvider = GMapProviders.GoogleMap;
             MainMap.Position = new PointLatLng(-31.9934926, 115.8032324);
             MainMap.MinZoom = 2;
             MainMap.MaxZoom = 17;
-            MainMap.Zoom = 5;
+            MainMap.Zoom = 11;
+            MainMap.ShowCenter = false;
             MainMap.CanDragMap = true;
+            MainMap.IsManipulationEnabled = true;
         }
 
-        // 在地图上添加标记
         public void AddMarker(double lat, double lng, string toolTipText)
         {
             GMapMarker marker = new GMapMarker(new PointLatLng(lat, lng))
@@ -40,13 +40,11 @@ namespace FallDetection.WPF.Views
             MainMap.Markers.Add(marker);
         }
 
-        // 清除所有标记
         public void ClearMarkers()
         {
             MainMap.Markers.Clear();
         }
 
-        // 在地图上添加多个标记
         public void AddMarkers(IEnumerable<DetectionModel> detections)
         {
             ClearMarkers(); // 清除旧的标记

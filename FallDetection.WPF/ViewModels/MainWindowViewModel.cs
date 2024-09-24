@@ -72,6 +72,7 @@ namespace FallDetection.WPF.ViewModels
             {
                 if (value != null)
                 {
+                    _detectionModelList = value;
                     onPropertyChanged(nameof(_detectionModelList));
                 }
             }
@@ -83,6 +84,7 @@ namespace FallDetection.WPF.ViewModels
             {
                 if (value != null)
                 {
+                    _searchName = value;
                     onPropertyChanged(nameof(_searchName));
                 }
             }
